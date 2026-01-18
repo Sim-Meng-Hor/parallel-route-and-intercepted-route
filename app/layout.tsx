@@ -1,4 +1,6 @@
 // app/layout.tsx
+import "./globals.css";
+
 export default function RootLayout({
   children,
   modal,
@@ -10,7 +12,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="relative">
         {children}
-        {modal} 
+        {modal}
       </body>
     </html>
   );
