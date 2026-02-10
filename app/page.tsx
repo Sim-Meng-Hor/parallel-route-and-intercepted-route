@@ -1,17 +1,28 @@
 // app/page.tsx
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
+
+import { photos } from "./data/photos";
 
 export default function Home() {
-  const photos = [1, 2, 3, 4, 5, 6];
-
   return (
     <main className="flex min-h-screen items-center justify-center p-8">
-      <div className="w-full max-w-2xl">
-        <div className="grid grid-cols-3 gap-6">
-          {photos.map((id) => (
-            <Link key={id} href={`/photos/${id}`}>
-              <div className="flex h-32 w-full items-center justify-center rounded-lg bg-gray-200 shadow-sm hover:shadow-md hover:bg-gray-300 transition-all duration-300 cursor-pointer">
-                <span className="text-2xl font-semibold text-gray-600">{id}</span>
+      <div className="w-full max-w-4xl">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
+          {photos.map((photo) => (
+            <Link key={photo.id} href={`/photos/${photo.id}`} scroll={false}>
+              <div className="group relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-200 shadow-sm transition-all duration-300 hover:shadow-md">
+                <Image
+                  src={photo.src}
+                  alt={photo.title}
+                  fill
+                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 33vw, 50vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gray-700">
+                  {photo.title}
+                </span>
               </div>
             </Link>
           ))}
